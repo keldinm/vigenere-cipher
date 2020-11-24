@@ -36,7 +36,6 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
   //attemps to open the file for the first time
   file.open(file_name);
  
-
   //if unable to open
   while (!file)
   {
@@ -56,10 +55,6 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
 
       if ((choice[0] == 'y') || (choice[0] == 'Y'))
       {
-        cout << "\033[2J\033[1;1H"; 
-        cout << "Ultra, Super High Security, Encryption, Vigenere Cipher! by Team[JAK]" << endl;
-        cout << "---------------------------------------------------------------------" << endl;
-        cout << "ENCRYPTION MODE: write a new encrypted file." << endl;
         cout << "\nEnter the name of the file (ESC + Enter to go back): ";
         getline(cin, file_name);
 
