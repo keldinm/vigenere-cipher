@@ -25,18 +25,20 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
   cout << "---------------------------------------------------------------------" << endl;
   cout << "DECRYPTION MODE: read and decrypt a message from a file." << endl;
 
-  //attempts to open file here
-  do
+  //captures name of the file
+  cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+  getline(cin, file_name);
+
+  //back button
+  if (file_name[0] == 27)
+    return 1;
+
+  //attempt to open file for the first time here
+  file.open(file_name);
+
+  //if file was not able to open
+  while (!file)
   {
-    cout << "\nEnter the name of the file (ESC + Enter to go back): ";
-    getline(cin, file_name);
-
-    //back button
-    if (file_name[0] == 27)
-      return 1;
-
-    file.open(file_name);
-
     if (!file)
     {
       cout << "\nError: unable to read file." << endl;
@@ -55,16 +57,21 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
       
       if ((choice[0] == 'y') || (choice[0] == 'Y'))
       {
-        cout << "\033[2J\033[1;1H";
-        cout << "Ultra, Super High Security, Encryption, Vigenere Cipher! by Team[JAK]" << endl;
-        cout << "---------------------------------------------------------------------" << endl;
-        cout << "DECRYPTION MODE: read and decrypt a message from a file." << endl;
+        cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+        getline(cin, file_name);
+
+        //back button
+         if (file_name[0] == 27)
+           return 1;
+
+        //tries to open file again
+        file.open(file_name);
       }
 
       else
         return -1;
     }
-  } while (!file);
+  }
 
   //reads in the file content while ignore the first 19 characters and stores into a string
   file.ignore(19);

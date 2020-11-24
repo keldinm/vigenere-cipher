@@ -68,7 +68,7 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
 
       else
         return -1;
-    }
+  }
 
   //enters message
   cout << "Enter message: ";
