@@ -25,20 +25,21 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
   cout << "---------------------------------------------------------------------" << endl;
   cout << "ENCRYPTION MODE: write a new encrypted file." << endl;
 
-  //attempts file open creating here
-  do
+  //enters name of file 
+  cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+  getline(cin, file_name);
+
+  //back button
+  if (file_name[0] == 27)
+    return 1;
+
+  //attemps to open the file for the first time
+  file.open(file_name);
+ 
+
+  //if unable to open
+  while (!file)
   {
-    cout << "\nEnter the name of the file (ESC + Enter to go back): ";
-    getline(cin, file_name);
-
-    //back button
-    if (file_name[0] == 27)
-      return 1;
-
-    file.open(file_name);
-
-    if (!file)
-    {
       cout << "\nError: unable to create file." << endl;
       cout << "Make sure directory is not read only." << endl;
       cout << "Would you like to try again? No to return to main menu." << endl;
@@ -59,12 +60,20 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
         cout << "Ultra, Super High Security, Encryption, Vigenere Cipher! by Team[JAK]" << endl;
         cout << "---------------------------------------------------------------------" << endl;
         cout << "ENCRYPTION MODE: write a new encrypted file." << endl;
+        cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+        getline(cin, file_name);
+
+        //back button
+        if (file_name[0] == 27)
+          return 1;
+
+        //tries to open file again
+        file.open(file_name);
       }
 
       else
         return -1;
     }
-  } while(!file);
 
   //enters message
   cout << "Enter message: ";
