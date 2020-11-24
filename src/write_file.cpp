@@ -39,35 +39,35 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
   //if unable to open
   while (!file)
   {
-      cout << "\nError: unable to create file." << endl;
-      cout << "Make sure directory is not read only." << endl;
-      cout << "Would you like to try again? No to return to main menu." << endl;
+    cout << "\nError: unable to create file." << endl;
+    cout << "Make sure directory is not read only." << endl;
+    cout << "Would you like to try again? No to return to main menu." << endl;
+    cout << "Choice Y/N: ";
+    getline(cin, choice);
+
+    while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
+    {
+      cout << "\nYou did not make a valid choice." << endl;
+      cout << "Please make a valid choice." << endl;
       cout << "Choice Y/N: ";
       getline(cin, choice);
+    }
 
-      while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
-      {
-        cout << "\nYou did not make a valid choice." << endl;
-        cout << "Please make a valid choice." << endl;
-        cout << "Choice Y/N: ";
-        getline(cin, choice);
-      }
+    if ((choice[0] == 'y') || (choice[0] == 'Y'))
+    {
+      cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+      getline(cin, file_name);
 
-      if ((choice[0] == 'y') || (choice[0] == 'Y'))
-      {
-        cout << "\nEnter the name of the file (ESC + Enter to go back): ";
-        getline(cin, file_name);
+      //back button
+      if (file_name[0] == 27)
+        return 1;
 
-        //back button
-        if (file_name[0] == 27)
-          return 1;
+      //tries to open file again
+      file.open(file_name);
+    }
 
-        //tries to open file again
-        file.open(file_name);
-      }
-
-      else
-        return -1;
+    else
+      return -1;
   }
 
   //enters message

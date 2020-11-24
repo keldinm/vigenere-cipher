@@ -36,7 +36,7 @@ int main()
   string key;
   string shift_message;
   string file_name;
-  
+
   //populates the vector of characters with the chart
   fill_chart(chart);
 
@@ -55,7 +55,7 @@ int main()
     cout << "What would you like to do?" << endl;
     cout << "1) Encryption" << endl;
     cout << "2) Decryption" << endl;
-    cout << "3) Print Expanded Vigenere Cipher (Tip: expand output window)" << endl;
+    cout << "3) Print Expanded Vigenere Cipher (Make sure to expand output window.)" << endl;
     cout << "4) Exit" << endl;
     cout << "Choice 1 - 4: ";
     getline(cin, choice);
@@ -68,7 +68,7 @@ int main()
       cout << "Choice 1 - 4: ";
       getline(cin, choice);
     }
-    
+
     //branching with encryption
     if (choice[0] == '1')
     {
@@ -77,11 +77,11 @@ int main()
       key.clear();
       shift_message.clear();
       file_name.clear();
-    } 
+    }
     //branching wth decryption
     else if (choice[0] == '2')
     {
-      run_program = read_file(chart, message, key, shift_message, file_name); 
+      run_program = read_file(chart, message, key, shift_message, file_name);
       message.clear();
       key.clear();
       shift_message.clear();
@@ -96,12 +96,12 @@ int main()
       run_program = false;
 
   } while(run_program);
-  
+
   message.clear();
   key.clear();
   shift_message.clear();
   file_name.clear();
-  
+
   //exit message
   int sleepTimer = 335000;
   cout << "\033[2J\033[1;1H";
@@ -136,7 +136,6 @@ int main()
   return 0;
 }
 
-//writes an encrypted file here
 int write_file(vector<char> &chart, string &message, string &key, string &shift_message, string &file_name)
 {
   //setting flag for encryption
@@ -154,46 +153,50 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
   cout << "---------------------------------------------------------------------" << endl;
   cout << "ENCRYPTION MODE: write a new encrypted file." << endl;
 
-  //attempts file open creating here
-  do
+  //enters name of file 
+  cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+  getline(cin, file_name);
+
+  //back button
+  if (file_name[0] == 27)
+    return 1;
+
+  //attemps to open the file for the first time
+  file.open(file_name);
+ 
+  //if unable to open
+  while (!file)
   {
-    cout << "\nEnter the name of the file (ESC + Enter to go back): ";
-    getline(cin, file_name);
+    cout << "\nError: unable to create file." << endl;
+    cout << "Make sure directory is not read only." << endl;
+    cout << "Would you like to try again? No to return to main menu." << endl;
+    cout << "Choice Y/N: ";
+    getline(cin, choice);
 
-    //back button
-    if (file_name[0] == 27)
-      return 1;
-
-    file.open(file_name);
-
-    if (!file)
+    while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
     {
-      cout << "\nError: unable to create file." << endl;
-      cout << "Make sure directory is not read only." << endl;
-      cout << "Would you like to try again? No to return to main menu." << endl;
+      cout << "\nYou did not make a valid choice." << endl;
+      cout << "Please make a valid choice." << endl;
       cout << "Choice Y/N: ";
       getline(cin, choice);
-
-      while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
-      {
-        cout << "\nYou did not make a valid choice." << endl;
-        cout << "Please make a valid choice." << endl;
-        cout << "Choice Y/N: ";
-        getline(cin, choice);
-      }
-
-      if ((choice[0] == 'y') || (choice[0] == 'Y'))
-      {
-        cout << "\033[2J\033[1;1H"; 
-        cout << "Ultra, Super High Security, Encryption, Vigenere Cipher! by Team[JAK]" << endl;
-        cout << "---------------------------------------------------------------------" << endl;
-        cout << "ENCRYPTION MODE: write a new encrypted file." << endl;
-      }
-
-      else
-        return -1;
     }
-  } while(!file);
+
+    if ((choice[0] == 'y') || (choice[0] == 'Y'))
+    {
+      cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+      getline(cin, file_name);
+
+      //back button
+      if (file_name[0] == 27)
+        return 1;
+
+      //tries to open file again
+      file.open(file_name);
+    }
+
+    else
+      return -1;
+  }
 
   //enters message
   cout << "Enter message: ";
@@ -252,7 +255,6 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
   return 0;
 }
 
-//reads in a file and decrypts here
 int read_file(vector<char> &chart, string &message, string &key, string &shift_message, string &file_name)
 {
   //setting flag for decryption
@@ -270,46 +272,50 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
   cout << "---------------------------------------------------------------------" << endl;
   cout << "DECRYPTION MODE: read and decrypt a message from a file." << endl;
 
-  //attempts to open file here
-  do
+  //captures name of the file
+  cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+  getline(cin, file_name);
+
+  //back button
+  if (file_name[0] == 27)
+    return 1;
+
+  //attempt to open file for the first time here
+  file.open(file_name);
+
+  //if file was not able to open
+  while (!file)
   {
-    cout << "\nEnter the name of the file (ESC + Enter to go back): ";
-    getline(cin, file_name);
+    cout << "\nError: unable to read file." << endl;
+    cout << "Make sure file exists in the directory and is accessible." << endl;
+    cout << "Would you like to try again? No to return to main menu." << endl;
+    cout << "Choice Y/N: ";
+    getline(cin, choice);
 
-    //back button
-    if (file_name[0] == 27)
-      return 1;
-
-    file.open(file_name);
-
-    if (!file)
+    while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
     {
-      cout << "\nError: unable to read file." << endl;
-      cout << "Make sure file exists in the directory and is accessible." << endl;
-      cout << "Would you like to try again? No to return to main menu." << endl;
+      cout << "\nYou did not make a valid choice." << endl;
+      cout << "Please make a valid choice." << endl;
       cout << "Choice Y/N: ";
       getline(cin, choice);
-
-      while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
-      {
-        cout << "\nYou did not make a valid choice." << endl;
-        cout << "Please make a valid choice." << endl;
-        cout << "Choice Y/N: ";
-        getline(cin, choice);
-      }
-      
-      if ((choice[0] == 'y') || (choice[0] == 'Y'))
-      {
-        cout << "\033[2J\033[1;1H";
-        cout << "Ultra, Super High Security, Encryption, Vigenere Cipher! by Team[JAK]" << endl;
-        cout << "---------------------------------------------------------------------" << endl;
-        cout << "DECRYPTION MODE: read and decrypt a message from a file." << endl;
-      }
-
-      else
-        return -1;
     }
-  } while (!file);
+      
+    if ((choice[0] == 'y') || (choice[0] == 'Y'))
+    {
+      cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+      getline(cin, file_name);
+
+      //back button
+      if (file_name[0] == 27)
+        return 1;
+
+      //tries to open file again
+      file.open(file_name);
+    }
+    
+    else
+      return -1;
+  }
 
   //reads in the file content while ignore the first 19 characters and stores into a string
   file.ignore(19);
@@ -391,7 +397,6 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
   return 0;
 }
 
-//decrypts/decrypts message here
 void encrypt_decrypt(vector<char> &chart, string &message, string &key, string &shift_message, bool &encrypt)
 {
   //vectors to hold casted message, key, and shifted message
@@ -463,7 +468,6 @@ void encrypt_decrypt(vector<char> &chart, string &message, string &key, string &
   }
 }
 
-//fills in the expanded vigenere cipher
 void fill_chart(vector<char> &chart)
 {
   //fills in chart with ascii 'A' to 'Z'
@@ -487,7 +491,6 @@ void fill_chart(vector<char> &chart)
     chart.push_back(i);
 }
 
-//checks that user didn't hit illegal keys on the keyboard
 bool no_illegal(string &string_check)
 {
   //finds if there is weird character/s

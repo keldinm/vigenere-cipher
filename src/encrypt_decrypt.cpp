@@ -6,7 +6,6 @@ using namespace std;
 
 void encrypt_decrypt(vector<char> &chart, string &message, string &key, string &shift_message, bool &encrypt)
 {
-
   //vectors to hold casted message, key, and shifted message
   //into integers for easy comparison of the new positions
   //of ascii letters and special character in the expanded chart

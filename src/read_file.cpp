@@ -39,38 +39,35 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
   //if file was not able to open
   while (!file)
   {
-    if (!file)
+    cout << "\nError: unable to read file." << endl;
+    cout << "Make sure file exists in the directory and is accessible." << endl;
+    cout << "Would you like to try again? No to return to main menu." << endl;
+    cout << "Choice Y/N: ";
+    getline(cin, choice);
+
+    while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
     {
-      cout << "\nError: unable to read file." << endl;
-      cout << "Make sure file exists in the directory and is accessible." << endl;
-      cout << "Would you like to try again? No to return to main menu." << endl;
+      cout << "\nYou did not make a valid choice." << endl;
+      cout << "Please make a valid choice." << endl;
       cout << "Choice Y/N: ";
       getline(cin, choice);
-
-      while (!((choice[0] == 'y') || (choice[0] == 'Y') || (choice[0] == 'n') || (choice[0] == 'N')))
-      {
-        cout << "\nYou did not make a valid choice." << endl;
-        cout << "Please make a valid choice." << endl;
-        cout << "Choice Y/N: ";
-        getline(cin, choice);
-      }
-      
-      if ((choice[0] == 'y') || (choice[0] == 'Y'))
-      {
-        cout << "\nEnter the name of the file (ESC + Enter to go back): ";
-        getline(cin, file_name);
-
-        //back button
-         if (file_name[0] == 27)
-           return 1;
-
-        //tries to open file again
-        file.open(file_name);
-      }
-
-      else
-        return -1;
     }
+      
+    if ((choice[0] == 'y') || (choice[0] == 'Y'))
+    {
+      cout << "\nEnter the name of the file (ESC + Enter to go back): ";
+      getline(cin, file_name);
+
+      //back button
+      if (file_name[0] == 27)
+        return 1;
+
+      //tries to open file again
+      file.open(file_name);
+    }
+    
+    else
+      return -1;
   }
 
   //reads in the file content while ignore the first 19 characters and stores into a string
