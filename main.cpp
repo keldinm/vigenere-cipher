@@ -136,6 +136,7 @@ int main()
   return 0;
 }
 
+//writes an encrypted file here
 int write_file(vector<char> &chart, string &message, string &key, string &shift_message, string &file_name)
 {
   //setting flag for encryption
@@ -255,6 +256,7 @@ int write_file(vector<char> &chart, string &message, string &key, string &shift_
   return 0;
 }
 
+//reads in a file and decrypts here
 int read_file(vector<char> &chart, string &message, string &key, string &shift_message, string &file_name)
 {
   //setting flag for decryption
@@ -397,6 +399,7 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
   return 0;
 }
 
+//decrypts/decrypts message here
 void encrypt_decrypt(vector<char> &chart, string &message, string &key, string &shift_message, bool &encrypt)
 {
   //vectors to hold casted message, key, and shifted message
@@ -468,6 +471,7 @@ void encrypt_decrypt(vector<char> &chart, string &message, string &key, string &
   }
 }
 
+//fills in the expanded vigenere cipher
 void fill_chart(vector<char> &chart)
 {
   //fills in chart with ascii 'A' to 'Z'
