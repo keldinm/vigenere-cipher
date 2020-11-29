@@ -344,7 +344,8 @@ int read_file(vector<char> &chart, string &message, string &key, string &shift_m
   cout << "\nDecrypted message: " << shift_message << endl;
 
   //ask user if write decrypted message to file
-  cout << "\nWould you like to write the decrypted message to the file?" << endl; cout << "Choice Y/N: ";
+  cout << "\nWould you like to write the decrypted message to the file?" << endl; 
+  cout << "Choice Y/N: ";
   getline(cin, choice);
       
   //make sure user makes right choice
