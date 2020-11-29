@@ -1,0 +1,11 @@
+Pseudocode: explains the function that checks if the user entered any illegal
+characters in the message or the key
+
+1. loops the number of times equivalent to the size of the length of text
+being checked at the time
+2. if in the current element being looked at in the text contains anything
+in the ascii chart that is higher than '~' or lower than ' ' (space) tell
+where the function was called that yes there was an illegal character found
+3. if we go through every element in the text and no ascii character higher
+than '~' or lower than ' ' (space) is found tell where the function was
+called that no illegal character was found
