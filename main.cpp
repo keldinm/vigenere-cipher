@@ -496,6 +496,7 @@ void fill_chart(vector<char> &chart)
     chart.push_back(i);
 }
 
+//illegal characters are found here
 bool no_illegal(string &string_check)
 {
   //finds if there is weird character/s

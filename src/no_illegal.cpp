@@ -10,6 +10,7 @@ at this point the string should already exist
 
 using namespace std;
 
+//illegal characters are found here
 bool no_illegal(string &string_check)
 {
   //finds if there is weird character/s
