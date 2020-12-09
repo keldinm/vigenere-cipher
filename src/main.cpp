@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <unistd.h>
 #include "fill_chart.h"
 #include "write_file.h"
 #include "read_file.h"
@@ -88,35 +87,7 @@ int main()
   file_name.clear();
 
   //exit message
-  int sleepTimer = 335000;
   cout << "\033[2J\033[1;1H";
-  cout.flush();
-  usleep(sleepTimer);
-  cout << "Thanks";
-  cout.flush();
-  cout << "\033[2J\033[1;1H";
-  usleep(sleepTimer);
-  cout << "       for";
-  cout.flush();
-  cout << "\033[2J\033[1;1H";
-  usleep(sleepTimer);
-  cout << "           using";
-  cout.flush();
-  cout << "\033[2J\033[1;1H";
-  usleep(sleepTimer);
-  cout << "                 the";
-  cout.flush();
-  cout << "\033[2J\033[1;1H";
-  usleep(sleepTimer);
-  cout << "                     program!";
-  cout.flush();
-  cout << "\033[2J\033[1;1H";
-  usleep(sleepTimer);
-  cout << "                              :)";
-  cout.flush();
-  cout << "\033[2J\033[1;1H";
-  usleep(sleepTimer);
-  cout << "\033[2J\033[1;1H";
-
+  cout << "Thanks for using the program! :)" << endl;
   return 0;
 }
